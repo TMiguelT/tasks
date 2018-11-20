@@ -12,6 +12,8 @@ task HTSeqCount {
         String format = "bam"
         String order = "pos"
         String stranded = "no"
+        String? idAttribute
+        String? featureType
 
         Int memory = 3
     }
@@ -24,6 +26,8 @@ task HTSeqCount {
         -f ~{format} \
         -r ~{order} \
         -s ~{stranded} \
+        ~{"-i " + idAttribute} \
+        ~{"-t " + featureType} \
         ~{sep=" " inputBams} \
         ~{gtfFile} \
         > ~{outputTable}
