@@ -9,15 +9,17 @@ task Star {
         File genomeDir
         String outFileNamePrefix
 
-        String outSAMtype = "BAM SortedByCoordinate"
         String readFilesCommand = "zcat"
-        Int runThreadN = 4
+
         String? outStd
         String? twopassMode
         Array[String]? outSAMattrRGline
         String? outSAMunmapped = "Within KeepPairs"
+        String outSAMtype = "BAM SortedByCoordinate"
         Int? limitBAMsortRAM
+        Int? outFilterMatchNmin
 
+        Int runThreadN = 4
         Int memory = 48
         String dockerTag = "2.6.0c--0"
     }
@@ -40,6 +42,7 @@ task Star {
         ~{"--outStd " + outStd} \
         ~{"--twopassMode " + twopassMode} \
         ~{"--limitBAMsortRAM " + limitBAMsortRAM} \
+        ~{"--outFilterMatchNmin " + outFilterMatchNmin} \
         ~{true="--outSAMattrRGline " false="" defined(outSAMattrRGline)} ~{sep=" , " outSAMattrRGline}
     }
 
